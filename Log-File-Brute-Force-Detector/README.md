@@ -1,5 +1,5 @@
 # Project Description:
-Creating a brute force detector for a log file that flags someone's IP address if they loggin more than four times incorrectly
+- Creating a brute force detector for a log file that flags someone's IP address if they loggin more than four times incorrectly
 
 # What I learned:
 - How to import modules and the default dictionary into a python file
