@@ -1,4 +1,4 @@
-# Log-File-Brute-Force-Detector Description:
+# Project Description:
 -Creating a brute force detector for a log file that flags someone's IP address if they loggin more than four times incorrectly
 
 # What I learned:
