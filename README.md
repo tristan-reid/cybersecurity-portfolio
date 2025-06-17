@@ -4,4 +4,4 @@ I'm a computer science student interested in application and system security. I 
 
 #Projects
 - [nmap Scanner](https://github.com/tristan-reid/cybersecurity-portfolio/blob/main/nmap-scanner)
-- [Simple Port Scanner](https://github.com/tdreid/port-scanner)
+- [Log File Brute Force Detector](https://github.com/tdreid/port-scanner)
