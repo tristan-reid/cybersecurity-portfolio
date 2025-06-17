@@ -1,0 +1,76 @@
+from cryptography.fernet import Fernet
+
+# Generate a new key and save it to a file
+def generate_key():
+    key = Fernet.generate_key()
+    with open("key.key", "wb") as key_file:
+        key_file.write(key)
+        print("Key generated and saved as key.key")
+
+# Load the previously generated key
+def load_key():
+    with open("key.key", "rb") as key_file:
+        return key_file.read()
+
+# Encrypt a file
+def encrypt_file(filename):
+    key = load_key()
+    fernet = Fernet(key)
+
+    # Read original file content
+    with open(filename, "rb") as file:
+        original_data = file.read()
+
+    # Encrypte the file content
+    encrypted_data = fernet.encrypt(original_data)
+
+    # Save encrypted data to a new file
+    encrypted_filename = filename + ".enc"
+    with open(encrypted_filename, "wb") as enc_file:
+        enc_file.write(encrypted_data)
+    
+    print(f"File encrypted: {encrypted_filename}")
+
+# Decrypt a file
+def decrypt_file(filename):
+    key = load_key()
+    fernet = Fernet(key)
+
+    # Read the encrypted data
+    with open(filename, "rb") as enc_file:
+        encrypted_data = enc_file.read()
+
+    # Try decrypting data
+    try:
+        decrypted_data = fernet.decrypt(encrypted_data)
+    except Exception as e:
+        print("Failed to decrypt. Wrong key or corrupted file")
+        return
+    
+    # Save decrypted data
+    decrypted_filename = filename + ".dec"
+    with open(decrypted_filename, "wb") as dec_file:
+        dec_file.write(decrypted_data)
+
+    print(f"File decrypted: {decrypted_filename}")
+
+# Running the key generator
+if __name__ == "__main__":
+    import sys
+    if len(sys.argv) != 3:
+        print("Usage:")
+        print("  python3 file_encryptor.py encrypt <filename>")
+        print("  python3 file_encryptor.py decrypt <filename>")
+        sys.exit(1)
+
+    action = sys.argv[1]
+    filename = sys.argv[2]
+    encrypt_file(filename)
+
+    if action == "encrypt":
+        encrypt_file(filename)
+    elif action == "decrypt":
+        decrypt_file(filename)
+    else:
+        print("Unkown action. Use 'encrypt' or 'decrypt'")
+    
